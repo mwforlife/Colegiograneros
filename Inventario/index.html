@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="author" content="Wilkens Mompoint">
     <meta name="application-name" content="Colegio Graneros - Sistema de Inventario">
-    <title>Sistema de  Inventario</title>
+    <title>Sistema de  Inventario - Colegio Graneros</title>
     
     
     <!-------------Stylesheets---------------------->
-    <link rel="icon" type="icon" href="img/logo/logo.jpg">
+    <link rel="icon" type="icon" href="../img/logo/logo.jpg">
     <link rel="stylesheet" href="css/animate.min.css">
     <link rel="stylesheet" href="css/jquery.animatedheadline.css">
     <link rel="stylesheet" href="css/normalize.css">
@@ -18,38 +18,45 @@
 </head>
 <body>
     <div class="border__left">
-    <figure class="logo__picture">
+    <div class="logo__picture">
         <img src="../img/logo/log.png" alt="" class="logo__img">
-    </figure>
+    </div>
     
     <nav class="menu__left">
         <ul class="menu__items">
-            <li class="menu__item"><a href="" class="menu__link">Dashboard</a></li>
-            <li class="menu__item"><a href="" class="menu__link">Componentes</a>
+            <li class="menu__item"><a href="" class="menu__link"><img src="../img/svg__icon/dashboard.svg" alt="" class="item__img">Dashboard</a></li>
+            
+            <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/dashboard.svg" alt="" class="item__img">Componentes</a>
                 <ul class="submenu__items">
                     <li class="submenu__item"><a href="" class="submenu__link">Agregar Componente</a></li>
                     <li class="submenu__item"><a href="" class="submenu__link">Lista de componentes</a></li>
                 </ul>
             </li>
-            <li class="menu__item"><a href="" class="menu__link"></a>
+            
+            <li class="menu__item"><a href="#" class="menu__link"></a>
                 <ul class="submenu__items">
                     <li class="submenu__item"><a href="" class="submenu__link">Agregar Componente</a></li>
                     <li class="submenu__item"><a href="" class="submenu__link">Lista de componentes</a></li>
                 </ul>
             </li>
-            <li class="menu__item"><a href="" class="menu__link"></a>
+            
+            <li class="menu__item"><a href="" class="menu__link"><img src="../img/svg__icon/dashboard.svg" alt="" class="item__img">Ubicacion</a>
             
             </li>
-            <li class="menu__item"><a href="" class="menu__link">Docentes</a>
-            <ul class="submenu__items">
+            
+            <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/docente.svg" alt="" class="item__img">Docentes</a>
+                <ul class="submenu__items">
                     <li class="submenu__item"><a href="" class="submenu__link">Lista de Docentes</a></li>
                     <li class="submenu__item"><a href="" class="submenu__link">Registrar Docentes</a></li>
-                </ul></li>
-            <li class="menu__item"><a href="" class="menu__link">Ajustes</a>
+                </ul>
+            </li>
+            
+            <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/dashboard.svg" alt="" class="item__img">Ajustes</a>
                 <ul class="submenu__items">
                     <li class="submenu__item"><a href="" class="submenu__link">Perfil de Usuario</a></li>
                 </ul>
             </li>
+            
         </ul>
     </nav>
     </div>
@@ -57,9 +64,42 @@
     
     <div class="border__right">
         <!----------------MENU HEADER-------------->
-        <header>
-
+        <header class="border__rigth--header">
+            <button class="menu__button">
+                <img src="../img/svg__icon/menu.svg" alt="" class="menu__button--img">
+            </button>
+            
+            <div class="header__menu">
+                <ul class="header__menu--items">
+                    <li class="header__menu--item"><a href="" class="header__menu--link"></a><img src="../img/svg__icon/fullscreen.svg" alt="" class="header__menu--img"></li>
+                    
+                    <li class="header__menu--item"><a href="" class="header__menu--link"></a><img src="../img/svg__icon/report.svg" alt="" class="header__menu--img"></li>
+                    
+                    <li class="header__menu--item"><a href="" class="header__menu--link"><img src="../img/svg__icon/user1.svg" alt="" class="header__menu--img"> Nombre <img src="../img/svg__icon/arrowbottom.svg" alt=""></a></li>
+                </ul>
+            </div>
         </header>
+        
+        <main class="container">
+            <h2 class="welcome">Bienvenido nombre</h2>
+            
+            <div class="componentes">
+               
+                <div class="recientes container__bg">
+                    <h3 class="card__title">Componentes recientes</h3>
+                    <table class="component__table">
+                        <tr>
+                            <th>Componentes</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="bodega container__bg">
+                    <h3 class="card__title">Componentes en bodega</h3>
+                </div>
+            </div>
+        </main>
         
     </div>
 
