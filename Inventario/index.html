@@ -48,7 +48,7 @@
 
                 <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/ubicacion.svg" alt="" class="item__img">Ajustes</a>
                     <ul class="submenu__items">
-                        <li class="submenu__item"><a href="#"  type="button" data-bs-toggle="modal" data-bs-target="#verperfil"  class="submenu__link">Perfil de Usuario</a></li>
+                        <li class="submenu__item"><a href="#"  type="button" data-bs-toggle="modal" data-bs-target="#miperfil"  class="submenu__link">Perfil de Usuario</a></li>
                     </ul>
                 </li>
 
@@ -315,7 +315,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><img src="../img/svg__icon/list.svg" alt="">Registrar Docentes</h5>
+        <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Docentes</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -348,6 +348,74 @@
   </div>
 </div>
     
+    
+    
+     <!-- Modal Listar Docente-->
+<div class="modal fade" id="listardocente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><img src="../img/svg__icon/list.svg" alt="">Lista de Docentes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+           <div class="col">
+           <table class="table table-dark table-striped">
+               <thead>
+                   <tr>
+                       <th>Nombre</th>
+                       <th>Apellido</th>
+                       <th>Numero de contacto</th>
+                       <th>Modificar</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   
+               </tbody>
+           </table>
+           </div>
+       </div>
+       
+      </div>
+      <div class="modal-footer">
+       <button type="reset" class="btn btn-warning">Restablecer</button>
+        <button type="submit" class="btn btn-success">Registrar</button>
+      </div>
+          
+      
+    </div>
+  </div>
+</div>
+   
+   
+        <!-- Modal Listar Docente-->
+<div class="modal fade" id="miperfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><img src="../img/svg__icon/user.svg" alt="">Mi Perfil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+           <div class="col">
+           </div>
+       </div>
+       
+      </div>
+      <div class="modal-footer">
+       <button type="reset" class="btn btn-warning">Restablecer</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
+      </div>
+          
+      
+    </div>
+  </div>
+</div>
+   
+
+          
     <!-------------JAVASCRIPTS-------------------->
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/animation-text-wrap.js"></script>
