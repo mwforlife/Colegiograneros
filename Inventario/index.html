@@ -35,7 +35,7 @@
                     </ul>
                 </li>
 
-                <li class="menu__item"><a href="" class="menu__link"><img src="../img/svg__icon/location.svg" alt="" class="item__img">Ubicacion</a>
+                <li class="menu__item"><a href="#" type="button" data-bs-toggle="modal" data-bs-target="#registrarubicacion"  class="menu__link"><img src="../img/svg__icon/location.svg" alt="" class="item__img" >Ubicacion</a>
 
                 </li>
 
@@ -399,21 +399,88 @@
       </div>
       <div class="modal-body">
        <div class="row">
-           <div class="col">
+           <div class="col text-center">
+           <img src="../img/svg__icon/user.svg" width="80" alt="">
            </div>
        </div>
        
+       <div class="row justify-content-center">
+          <div class="col-md-10">
+              <label for="" class="form-control text-center">Administrador</label>
+          </div>
+           <div class="col-md-5">
+               <label for="">Nombre</label>
+               <input type="text" value="Nombre" class="form-control">
+           </div>
+           <div class="col-md-5">
+               <label for="">Apellido</label>
+               <input type="text" class="form-control" value="Apellido">
+           </div>
+           
+           <div class="col-md-10">
+               <label for="">Numero de contacto</label>
+               <input type="number" value="912345678" class="form-control">
+           </div>
+          </div>
+      </div>
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-warning"><img src="../img/svg__icon/edit.svg" alt="">Modificar</button>
+        <button type="button" class="btn btn-success"><img src="../img/svg__icon/new.svg" alt="">Guardar</button>
+      </div>
+            
+    </div>
+  </div>
+</div>
+   
+          
+               
+   <!-- Modal Registrar Docente-->
+<div class="modal fade" id="registrarubicacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Ubicacion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <div class="row justify-content-center">
+           <div class="col-md-4">
+               <div class="label">Ubicacion Nueva</div>
+               <input type="text" class="form-control">
+           </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center ">
+               <button type="reset" class="btn btn-warning">Restablecer</button>
+                <button type="submit" class="btn btn-success ">Registrar</button>
+                
+            </div>
+        </div>
+        
+        <hr class="w-100">
+      <div class="row">
+          <div class="col-md-12">
+              <table class="table table-dark table-striped caption-top">
+                <caption>Lista de Ubicaiones</caption>
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                      </tr>
+                  </thead>
+              </table>
+          </div>
+      </div>
       </div>
       <div class="modal-footer">
-       <button type="reset" class="btn btn-warning">Restablecer</button>
-        <button type="submit" class="btn btn-success">Guardar</button>
       </div>
           
       
     </div>
   </div>
 </div>
-   
+    
 
           
     <!-------------JAVASCRIPTS-------------------->
