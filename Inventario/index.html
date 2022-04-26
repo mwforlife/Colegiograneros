@@ -51,6 +51,23 @@
                         <li class="submenu__item"><a href="#"  type="button" data-bs-toggle="modal" data-bs-target="#miperfil"  class="submenu__link">Perfil de Usuario</a></li>
                     </ul>
                 </li>
+                
+                <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/credit.svg" alt="" class="item__img"> Prestamos</a>
+                    <ul class="submenu__items">
+                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Prestamo</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link">Listado de Prestamos</a></li>
+                    </ul>
+                </li>
+                
+                
+                <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/categorias.svg" alt="" class="item__img"> Categorias</a>
+                    <ul class="submenu__items">
+                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Estado</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Tipo</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Status</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link">Nueva Ubicacion</a></li>
+                    </ul>
+                </li>
 
             </ul>
         </nav>
@@ -75,7 +92,11 @@
                     
                     <li class="header__menu--item"><a href="#" title="Reporte" class="header__menu--link"><img src="../img/svg__icon/report.svg" alt="" class="header__menu--img"></a></li>
                     
-                    <li class="header__menu--item"><a href="" class="header__menu--link"><img src="../img/svg__icon/user1.svg" alt="" class="header__menu--img"> Nombre <img src="../img/svg__icon/arrowbottom.svg" alt=""></a></li>
+                    <li class="header__menu--item"><a href="#" class="header__menu--link"><img src="../img/svg__icon/user1.svg" alt="" class="header__menu--img"> Nombre <img src="../img/svg__icon/arrowbottom.svg" alt=""></a>
+                    <ul class="submenu__items">
+                        <li class="submenu__item"><a href="" class="submenu__link">Cerrar Sesion</a></li>
+                    </ul>
+                    </li>
                 </ul>
             </div>
         </header>
@@ -213,7 +234,7 @@
             
             <div class="col-md-6">
                 <label for="">Estado:</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="CGEstadoComponente" class="form-control">
                     <option disabled value="0" selected>Seleccione el estado</option>
                 </select>
             </div>
@@ -222,14 +243,14 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="">Ubicacion:</label>
-                <select name="" id="" class="form-control">
+                <select name="" id="CGUbicacion" class="form-control">
                     <option disabled value="0" selected>Seleccione una unicacion</option>
                 </select>
             </div>
 
             <div class="col-md-6">
                 <label for="">Tipo de Componente:</label>
-                    <select name="" id="" class="form-control">
+                    <select name="" id="CGTipoComponente" class="form-control">
                         <option disabled value="0" selected>Seleccione el Tipo</option>
                     </select>
             </div>
@@ -485,15 +506,13 @@
           
     <!-------------JAVASCRIPTS-------------------->
     <script src="../js/jquery-3.6.0.js"></script>
-    <script src="../js/animation-text-wrap.js"></script>
-    <script src="../js/animation.main.js"></script>
     <script src="../js/anime.min.js"></script>
     <script src="../js/bootstrap.bundle.js"></script>
-    <script src="../js/jquery.animatedheadline.js"></script>
-    <script src="../js/jquery.animatedheadline.min.js"></script>
     <script src="../js/sweetalert2.all.min.js"></script>
     <script src="js/Databales_bootstap5.js"></script>
     <script src="js/jquery.dataTables.js"></script>
     <script src="js/inventario_main_js.js"></script>
+    <script src="../js/process/inventario__insert__process.js"></script>
+    <script src="../js/process/inventario__list__process.js"></script>
 </body>
 </html>
