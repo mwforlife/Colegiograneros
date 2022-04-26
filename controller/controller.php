@@ -25,6 +25,29 @@ include '../Model/EstadoComponente.php';
          $this->mi->close();
      }
 
+     /* Login Usuario**/
+     public function CGUSer__login($user, $pass)
+     {
+         $this->conexion();
+         $sql = "SELECT * FROM CGUser WHERE log_usu = '$user' AND pas_usu = '$pass'";
+         $result = $this->mi->query($sql);
+         if($rs = mysqli_fetch_array($result))
+         {
+             $id = $rs['id_usu'];
+             $nombre = $rs['nom_usu'];
+             $apellido = $rs['ape_usu'];
+             $email = $rs['correo'];
+            $tipo = $rs['id_tip'];
+            $toten = $rs['toten'];
+            $modified = $rs['modified'];
+            $usu = new CGUser($id, $nombre, $apellido, $email,$user, $pass, $tipo, $toten, $modified);
+            $this->desconexion();
+            return $usu;
+            }
+         $this->desconexion();
+         return "Error de Usuario o Contraseña";
+     } 
+    /******************************************************************************************************* */
      public function ListarTipoComponente(){
          $this->conexion();
          $sql = "SELECT * FROM CGTipoComponente";

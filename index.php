@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION['id_usu'])){
+    header("Location: Inventario");
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,10 +37,10 @@
                <div class="borde__derecho">
                   <form action="" class="form__login">    
                    <img src="img/svg__icon/login.svg" alt="" class="login__logo">
-                   <input type="text" placeholder="Nombre de Usuario" class="input__form input__form--user">
-                   <input type="password" placeholder="Contraseña" class="input__form input__form--password">
+                   <input type="text" id="txtusu" placeholder="Nombre de Usuario" class="input__form input__form--user">
+                   <input type="password" id="txtpas" placeholder="Contraseña" class="input__form input__form--password">
                    
-                   <button type="submit" class="submit__form">LOGIN</button>
+                   <button type="button" onclick="login()" class="submit__form">LOGIN</button>
                   </form>
                    
                </div>
@@ -40,25 +49,15 @@
    </main>
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <!-------------JAVASCRIPTS-------------------->
     <script src="js/jquery-3.6.0.js"></script>
-    <script src="js/animation-text-wrap.js"></script>
-    <script src="js/animation.main.js"></script>
+    <!--<script src="js/animation.main.js"></script>-->
     <script src="js/anime.min.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
     <script src="js/jquery.animatedheadline.js"></script>
     <script src="js/jquery.animatedheadline.min.js"></script>
+    <script src="js/animation-text-wrap.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/process/login__main.js"></script>
 </body>
 </html>
