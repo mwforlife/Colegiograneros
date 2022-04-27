@@ -13,8 +13,19 @@ $(document).ready(function() {
                 if (datos == 2 || datos == '2') {
                     swal.fire('¡Oh Oh!', 'Hubo Un error, Verifique los datos', 'error');
                 } else if (datos == 3 || datos == '3') {
-                    swal.fire('¡Felicidades!', 'Felicidades Su componente ha sido registrado con exito', 'success');
-                    window.location = '/';
+                    Swal.fire({
+                        title: 'Felicidades Su componentes Ha sido registrado con exito',
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: 'OK',
+                      }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            window.location = 'index.php';
+                        } else if (result.isDenied) {
+                            window.location = 'index.php';
+                        }
+                      })
                 } else {
                     swal.fire('¡Owww!', datos, 'warning');
                 }
@@ -28,3 +39,7 @@ $(document).ready(function() {
 
     });
 });
+
+
+
+

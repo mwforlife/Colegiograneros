@@ -7,24 +7,34 @@ function validarcampos(valor){
     
 }
 
-
-function generar(){
-    var inicial = $("#inicial").val();
+var arrayCantidad = [];
+var arrayType = [];
+var x=0;
+var y=0;
+function agregar(){
     var type = $("#type").val();
     var cantidad = $("#cantidad").val();
+
+    arrayCantidad.push(cantidad);
+    arrayType.push(type);
+
+    console.log("Agregago con exito");
+    console.log(arrayType+" "+arrayCantidad);
+
+    $("#cantidad").val("");
+    $("#cantidad").focus();
+}
+
+function generar(){
+    var type = JSON.encode(arrayType);
+    var cantidad = JSON.encode(arrayCantidad);
+    var parametros = "type="+type+"&cantidad="+cantidad;
+
+    window.location = "generador.php?"+parametros;
     
-    
-    if(validarcampos(inicial)){
-        swal.fire("Error", "Debes rellenar el campo","error");
-        return;
-    }else if(inicial.length<7){
-        swal.fire("Error", "El Codigo debe ser de 10 digitos","error");
-        return;
-    }
-    var parametros = "inicial="+inicial+"&type="+type+"&cantidad="+cantidad;
-    $.ajax({
+    /*$.ajax({
         url: 'generador.php',
-        type: 'GET',
+        type: 'POST',
         data: parametros,
     })
     .done(function(datos){
@@ -33,6 +43,19 @@ function generar(){
     .fail(function(){
         swal.fire("Error", "Error de Generacion de Codigo","error");
     })
+*/
+
+    /*var miAjax = new Request({
+        url: "generador.php",
+        data: parametros,
+        onSuccess: function(datos){
+            $("#root").append(datos);
+        },
+        onFailure: function(){
+            swal.fire("Error", "Error de Generacion de Codigo","error");
+        }
+     })
+     miAjax.send();*/
 }
 
 function imprSelec() {

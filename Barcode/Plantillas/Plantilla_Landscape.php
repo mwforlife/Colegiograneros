@@ -20,7 +20,7 @@ class PDF extends FPDF{
         $this->SetY(-18);
         $this->SetFont('Arial','I',12);
         $this->AddLink();
-        $this->Cell(5,10,'www.wilkenstech.com',0,0,'L');
+        $this->Cell(5,10,'www.Colegiograneros.cl',0,0,'L');
         $this->SetFont('Arial','I',10);
         $this->Cell(0,10,utf8_decode('Página').$this->PageNo().' de {nb}',0,0,'C');
     }

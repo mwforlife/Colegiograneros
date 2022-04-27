@@ -128,7 +128,7 @@ require_once '../controller/controller.php';
                             <th>Ubicacion</th>
                             <th>Detalles</th>
                             <th>Modificar</th>
-                            <th>Eliminar</th>
+                            <th >Eliminar</th>
                         </tr>
                      </thead>
                     <tbody>
@@ -143,9 +143,9 @@ require_once '../controller/controller.php';
                                 echo "<td>".$CGC->getNombre()."</td>";
                                 echo "<td>".$CGC->getEstado()."</td>";
                                 echo "<td>".$CGC->getUbicacion()."</td>";
-                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick(detalles(".$CGC->getId()."))><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
-                                echo "<td><span class='badge bg-warning'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modalmodify' onclick(modificar(".$CGC->getId()."))><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
-                                echo "<td><span class='badge bg-danger'><a href='#' onclick(eliminar(".$CGC->getId()."))><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick='detalles(".$CGC->getId().")'><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-warning'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modalmodify' onclick='modificar(".$CGC->getId().")'><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-danger'><a href='#' onclick='delete__component(".$CGC->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
                                 echo "</tr>";
 
                                 
@@ -343,9 +343,9 @@ require_once '../controller/controller.php';
                                 echo "<td>".$CGC->getNombre()."</td>";
                                 echo "<td>".$CGC->getEstado()."</td>";
                                 echo "<td>".$CGC->getUbicacion()."</td>";
-                                echo "<td><span class='badge bg-success'><a href='#' onclick(detalles(".$CGC->getId()."))><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
-                                echo "<td><span class='badge bg-warning'><a href='#' onclick(modificar(".$CGC->getId()."))><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
-                                echo "<td><span class='badge bg-danger'><a href='#' onclick(eliminar(".$CGC->getId()."))><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick='detalles(".$CGC->getId().")'><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-warning'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modalmodify' onclick='modificar(".$CGC->getId().")'><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-danger'><a href='#' onclick='delete__component(".$CGC->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
                                 echo "</tr>";
                             }
                         }
@@ -592,5 +592,7 @@ require_once '../controller/controller.php';
     <script src="js/inventario_main_js.js"></script>
     <script src="../js/process/inventario__insert__process.js"></script>
     <script src="../js/process/inventario__list__process.js"></script>
+    <script src="../js/process/inventario__delete__process.js"></script>
+    <script src="../js/process/inventario__modify__process.js"></script>
 </body>
 </html>
