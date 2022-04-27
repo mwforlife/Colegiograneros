@@ -57,7 +57,7 @@ insert into CGUbicacion(nom_ubi) values('Prekinder A');
 insert into CGUbicacion(nom_ubi) values('Prekinder B');
 insert into CGUbicacion(nom_ubi) values('Kinder A');
 insert into CGUbicacion(nom_ubi) values('Kinder B');
-insert into CGUbicacion(nom_ubi) values('Laboratorio COmputacion');
+insert into CGUbicacion(nom_ubi) values('Laboratorio Computacion');
 insert into CGUbicacion(nom_ubi) values('Sala Computacion');
 insert into CGUbicacion(nom_ubi) values('Biblioteca');
 insert into CGUbicacion(nom_ubi) values('Laboratorio');
@@ -104,6 +104,9 @@ insert into CGTipoComponente(nom_tip_comp) values('UPS');
 insert into CGTipoComponente(nom_tip_comp) values('Disco Duro');
 insert into CGTipoComponente(nom_tip_comp) values('Puntero Laser');
 insert into CGTipoComponente(nom_tip_comp) values('Copiadora CD');
+insert into CGTipoComponente(nom_tip_comp) values('OTROS');
+
+select * from CGTipoComponente;
 
 create table EstadoComponentes(
 id_est_comp int not null auto_increment primary key,
@@ -131,7 +134,7 @@ insert into StatusComponentes(nom_sta_comp) values('En Asignacion');
 
 create table CGComponentes(
 id_comp int not null auto_increment primary key,
-folio_comp int not null,
+folio_comp varchar(30) not null,
 nom_comp varchar(30) not null,
 id_ubi int not null references CGUbicacion(id_ubi),
 descripcion varchar(100) not null,
@@ -140,6 +143,10 @@ id_tip_comp int not null references CGTipoComponente(id_tip_comp),
 id_est_comp int not null references EstadoComponentes(id_est_comp),
 id_sta_comp int not null references StatusComponentes(id_sta_comp)
 );
+
+
+insert into CGComponentes values(null,'PC100000', 'PC I5',1,'CPU I5, RAM 4G, Windows 10', 'Perfecto estado', 1,1,1);
+
 
 create table CGEstado_Prestamo(
 id_est_pres int not null auto_increment primary key,
@@ -160,3 +167,7 @@ fecha_prest date not null,
 fecha_dev date,
 observacion varchar(100) not null
 );
+
+select * from CGComponentes;
+
+SELECT id_comp, folio_comp, nom_comp, nom_ubi, descripcion, observacion, nom_tip_comp, nom_est_comp, nom_sta_comp FROM CGComponentes,CGUbicacion, CGTipoComponente, EstadoComponentes, StatusComponentes WHERE CGComponentes.id_ubi = CGUbicacion.id_ubi AND CGComponentes.id_tip_comp = CGTipoComponente.id_tip_comp AND CGComponentes.id_est_comp = EstadoComponentes.id_est_comp AND CGComponentes.id_sta_comp = StatusComponentes.id_sta_comp;

@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once '../controller/controller.php';
+    if (!isset($_SESSION['id_usu'])) {
+        header('Location: ../index.php');
+    }
+
+    $c = new Controller();
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -92,7 +103,7 @@
                     
                     <li class="header__menu--item"><a href="#" title="Reporte" class="header__menu--link"><img src="../img/svg__icon/report.svg" alt="" class="header__menu--img"></a></li>
                     
-                    <li class="header__menu--item"><a href="#" class="header__menu--link"><img src="../img/svg__icon/user1.svg" alt="" class="header__menu--img"> Nombre <img src="../img/svg__icon/arrowbottom.svg" alt=""></a>
+                    <li class="header__menu--item"><a href="#" class="header__menu--link"><img src="../img/svg__icon/user1.svg" alt="" class="header__menu--img"> <?php echo $_SESSION['nombre']?> <img src="../img/svg__icon/arrowbottom.svg" alt=""></a>
                     <ul class="submenu__items">
                         <li class="submenu__item"><a href="" class="submenu__link">Cerrar Sesion</a></li>
                     </ul>
@@ -102,7 +113,7 @@
         </header>
         
         <main class="containr">
-            <h2 class="welcome">Bienvenido nombre</h2>
+            <p class="welcome">Bienvenido <span class="user__name"><?php echo $_SESSION['nombre']?></span></p>
             
             <div class="componentes">
                
@@ -121,18 +132,28 @@
                         </tr>
                      </thead>
                     <tbody>
-                        <tr>
-                            <td>12543621</td>
-                            <td>PC HP</td>
-                            <td>Nuevo</td>
-                            <td>Bodega</td>
-                            
-                            <td><span class="badge bg-success"><a href="#"><img src="../img/svg__icon/details.svg" alt=""></a></span></td>
-                            
-                            <td><span class="badge bg-warning"><a href="#"><img src="../img/svg__icon/edit.svg" alt=""></a></span></td>
-                            
-                            <td><span class="badge bg-danger"><a href="#"><img src="../img/svg__icon/delete.svg" alt=""></a></span></td>
-                        </tr>
+                        <?php
+                        $lista = $c->ListarComponentes1();
+                        
+                        if (count($lista)>0) {
+                            for ($i=0; $i < count($lista); $i++) { 
+                                $CGC = $lista[$i];
+                                echo "<tr>";
+                                echo "<td>".$CGC->getId()."</td>";
+                                echo "<td>".$CGC->getNombre()."</td>";
+                                echo "<td>".$CGC->getEstado()."</td>";
+                                echo "<td>".$CGC->getUbicacion()."</td>";
+                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick(detalles(".$CGC->getId()."))><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-warning'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modalmodify' onclick(modificar(".$CGC->getId()."))><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-danger'><a href='#' onclick(eliminar(".$CGC->getId()."))><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                                echo "</tr>";
+
+                                
+                            }
+                        }
+                        ?>
+
+
                     </tbody>
                     </table>
                 </div>
@@ -223,19 +244,19 @@
         <h5 class="modal-title animate__animated animate__zoomInDown"><img src="../img/svg__icon/new.svg" alt="">Nuevo Componente</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="">
+      <form id="CGComponentRegister" action="">
       <div class="modal-body">
        
         <div class="row">
             <div class="col-md-6">
                 <label for="">Componente:</label>
-                <input type="text" id="CGComponente" class="form-control" placeholder="Ingrese el componente">
+                <input type="text" id="CGComponente" name="CGComponente" class="form-control" placeholder="Ingrese el componente" required min="2">
             </div>
             
             <div class="col-md-6">
                 <label for="">Estado:</label>
-                <select name="" id="CGEstadoComponente" class="form-control">
-                    <option disabled value="0" selected>Seleccione el estado</option>
+                <select id="CGEstadoComponente" name="CGEStadoComponente" class="form-control">
+                    <option value="0" selected>Seleccione el estado</option>
                 </select>
             </div>
         </div>
@@ -243,28 +264,35 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="">Ubicacion:</label>
-                <select name="" id="CGUbicacion" class="form-control">
-                    <option disabled value="0" selected>Seleccione una unicacion</option>
+                <select name="CGUbicacion" id="CGUbicacion" class="form-control">
+                    <option value="0" selected>Seleccione una unicacion</option>
                 </select>
             </div>
 
             <div class="col-md-6">
                 <label for="">Tipo de Componente:</label>
-                    <select name="" id="CGTipoComponente" class="form-control">
-                        <option disabled value="0" selected>Seleccione el Tipo</option>
+                    <select name="CGTipoComponente" id="CGTipoComponente" class="form-control">
+                        <option value="0" selected>Seleccione el Tipo</option>
                     </select>
             </div>
         </div>
-        
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <label for="">Status</label>
+                <select name="CGStatus" id="CGStatus" class="form-control">
+                    <option value="0" selected>Seleccione el status</option>
+                </select>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <label for="">Descripcion</label>
-                <textarea name="" id="CGDescripcionComponente" cols="30" rows="10" class="form-control"></textarea>
+                <textarea name="CGDescripcion" id="CGDescripcionComponente" cols="30" rows="10" class="form-control"></textarea>
             </div>
         
             <div class="col-md-6">
                     <label for="">Observacíon</label>
-                    <textarea name="" id="CGObservacionComponente" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="CGObservacion" id="CGObservacionComponente" cols="30" rows="10" class="form-control"></textarea>
                 </div>
             </div>
         
@@ -304,18 +332,24 @@
                         </tr>
                      </thead>
                     <tbody>
-                        <tr>
-                            <td>12543621</td>
-                            <td>PC HP</td>
-                            <td>Nuevo</td>
-                            <td>Bodega</td>
-                            
-                            <td><span class="badge bg-success"><a href="#"><img src="../img/svg__icon/details.svg" alt=""></a></span></td>
-                            
-                            <td><span class="badge bg-warning"><a href="#"><img src="../img/svg__icon/edit.svg" alt=""></a></span></td>
-                            
-                            <td><span class="badge bg-danger"><a href="#"><img src="../img/svg__icon/delete.svg" alt=""></a></span></td>
-                        </tr>
+                        <?php
+                        $lista = $c->ListarComponentes1();
+
+                        if (count($lista)>0) {
+                            for ($i=0; $i < count($lista); $i++) { 
+                                $CGC = $lista[$i];
+                                echo "<tr>";
+                                echo "<td>".$CGC->getId()."</td>";
+                                echo "<td>".$CGC->getNombre()."</td>";
+                                echo "<td>".$CGC->getEstado()."</td>";
+                                echo "<td>".$CGC->getUbicacion()."</td>";
+                                echo "<td><span class='badge bg-success'><a href='#' onclick(detalles(".$CGC->getId()."))><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-warning'><a href='#' onclick(modificar(".$CGC->getId()."))><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-danger'><a href='#' onclick(eliminar(".$CGC->getId()."))><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                                echo "</tr>";
+                            }
+                        }
+                        ?>
                     </tbody>
                     </table>
         
@@ -410,7 +444,7 @@
 </div>
    
    
-        <!-- Modal Listar Docente-->
+        <!-- Modal Mi perfil-->
 <div class="modal fade" id="miperfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
@@ -456,7 +490,7 @@
    
           
                
-   <!-- Modal Registrar Docente-->
+   <!-- Modal Registrar Ubicacion-->
 <div class="modal fade" id="registrarubicacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -483,7 +517,7 @@
       <div class="row">
           <div class="col-md-12">
               <table class="table table-dark table-striped caption-top">
-                <caption>Lista de Ubicaiones</caption>
+                <caption>Lista de Ubicaciones</caption>
                   <thead>
                       <tr>
                           <th>ID</th>
@@ -502,6 +536,50 @@
   </div>
 </div>
     
+
+   <!-- Modal modal Details-->
+   <div class="modal fade" id="modaldetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><img src="../img/svg__icon/user.svg" alt="">Detalles Componente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+           <div class="col text-center">
+           <img src="../img/svg__icon/user.svg" width="80" alt="">
+           </div>
+       </div>
+       
+       <div class="row justify-content-center">
+          <div class="col-md-10">
+              <label for="" class="form-control text-center">Administrador</label>
+          </div>
+           <div class="col-md-5">
+               <label for="">Nombre</label>
+               <input type="text" value="Nombre" class="form-control">
+           </div>
+           <div class="col-md-5">
+               <label for="">Apellido</label>
+               <input type="text" class="form-control" value="Apellido">
+           </div>
+           
+           <div class="col-md-10">
+               <label for="">Numero de contacto</label>
+               <input type="number" value="912345678" class="form-control">
+           </div>
+          </div>
+      </div>
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-warning"><img src="../img/svg__icon/edit.svg" alt="">Modificar</button>
+        <button type="button" class="btn btn-success"><img src="../img/svg__icon/new.svg" alt="">Guardar</button>
+      </div>
+            
+    </div>
+  </div>
+</div>
 
           
     <!-------------JAVASCRIPTS-------------------->

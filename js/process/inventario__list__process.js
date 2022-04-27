@@ -2,6 +2,7 @@ window.onload = function() {
     listarEstadoComponente();
     listarTipoComponente();
     listarUbicacionComponente();
+    listarStatusComponente();
 }
 
 
@@ -32,6 +33,21 @@ function listarTipoComponente(){
         swal.fire("Error", "Error de Conexion","error");
     })
 }
+
+function listarStatusComponente(){
+    $.ajax({
+        url: '../view/CGComponent_status.php',
+        type: 'POST',
+        data: 'none',
+    })
+    .done(function(datos){
+        $("#CGStatus").append(datos);      
+    })
+    .fail(function(){
+        swal.fire("Error", "Error de Conexion","error");
+    })
+}
+
 
 function listarUbicacionComponente(){
     $.ajax({

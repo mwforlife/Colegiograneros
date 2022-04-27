@@ -138,7 +138,7 @@ include '../Model/EstadoComponente.php';
                 $ubi = $rs['id_ubi'];
                 $descripcion = $rs['descripcion'];
                 $observacion = $rs['observacion'];
-                $tip = $rs['id_tip_com'];
+                $tip = $rs['id_tip_comp'];
                 $est = $rs['id_est_comp'];
                 $sta = $rs['id_sta_comp'];
                 $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
@@ -147,6 +147,32 @@ include '../Model/EstadoComponente.php';
             $this->desconexion();
             return $lista;
         }
+
+        public function ListarComponentes1(){
+            $this->conexion();
+            $sql = "SELECT id_comp, folio_comp, nom_comp, nom_ubi, descripcion, observacion, nom_tip_comp, nom_est_comp, nom_sta_comp FROM CGComponentes,CGUbicacion, CGTipoComponente, EstadoComponentes, StatusComponentes WHERE CGComponentes.id_ubi = CGUbicacion.id_ubi AND CGComponentes.id_tip_comp = CGTipoComponente.id_tip_comp AND CGComponentes.id_est_comp = EstadoComponentes.id_est_comp AND CGComponentes.id_sta_comp = StatusComponentes.id_sta_comp";
+            $resultado = $this->mi->query($sql);
+            $lista = array();
+            while($rs = mysqli_fetch_array($resultado)){
+                $id = $rs['id_comp'];
+                $folio = $rs['folio_comp'];
+                $nom = $rs['nom_comp'];
+                $ubi = $rs['nom_ubi'];
+                $descripcion = $rs['descripcion'];
+                $observacion = $rs['observacion'];
+                $tip = $rs['nom_tip_comp'];
+                $est = $rs['nom_est_comp'];
+                $sta = $rs['nom_sta_comp'];
+                $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
+                $lista[] = $comp;
+            }
+            $this->desconexion();
+            return $lista;
+        }
+
+
+
+
 
         public function ListarComponentesPorFolio($folio){
             $this->conexion();
@@ -160,7 +186,7 @@ include '../Model/EstadoComponente.php';
                 $ubi = $rs['id_ubi'];
                 $descripcion = $rs['descripcion'];
                 $observacion = $rs['observacion'];
-                $tip = $rs['id_tip_com'];
+                $tip = $rs['id_tip_comp'];
                 $est = $rs['id_est_comp'];
                 $sta = $rs['id_sta_comp'];
                 $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
@@ -182,7 +208,7 @@ include '../Model/EstadoComponente.php';
                 $ubi = $rs['id_ubi'];
                 $descripcion = $rs['descripcion'];
                 $observacion = $rs['observacion'];
-                $tip = $rs['id_tip_com'];
+                $tip = $rs['id_tip_comp'];
                 $est = $rs['id_est_comp'];
                 $sta = $rs['id_sta_comp'];
                 $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
@@ -204,7 +230,7 @@ include '../Model/EstadoComponente.php';
                 $ubi = $rs['id_ubi'];
                 $descripcion = $rs['descripcion'];
                 $observacion = $rs['observacion'];
-                $tip = $rs['id_tip_com'];
+                $tip = $rs['id_tip_comp'];
                 $est = $rs['id_est_comp'];
                 $sta = $rs['id_sta_comp'];
                 $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
@@ -226,7 +252,7 @@ include '../Model/EstadoComponente.php';
                 $ubi = $rs['id_ubi'];
                 $descripcion = $rs['descripcion'];
                 $observacion = $rs['observacion'];
-                $tip = $rs['id_tip_com'];
+                $tip = $rs['id_tip_comp'];
                 $est = $rs['id_est_comp'];
                 $sta = $rs['id_sta_comp'];
                 $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
@@ -248,7 +274,7 @@ include '../Model/EstadoComponente.php';
                 $ubi = $rs['id_ubi'];
                 $descripcion = $rs['descripcion'];
                 $observacion = $rs['observacion'];
-                $tip = $rs['id_tip_com'];
+                $tip = $rs['id_tip_comp'];
                 $est = $rs['id_est_comp'];
                 $sta = $rs['id_sta_comp'];
                 $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
@@ -270,7 +296,7 @@ include '../Model/EstadoComponente.php';
                 $ubi = $rs['id_ubi'];
                 $descripcion = $rs['descripcion'];
                 $observacion = $rs['observacion'];
-                $tip = $rs['id_tip_com'];
+                $tip = $rs['id_tip_comp'];
                 $est = $rs['id_est_comp'];
                 $sta = $rs['id_sta_comp'];
                 $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
@@ -298,19 +324,29 @@ include '../Model/EstadoComponente.php';
             }
         }
 
+
+        /*Funciones personalizadas */
+        public function BuscarUltimoID(){
+            $this->conexion();
+            $sql = "SELECT MAX(id_comp) AS id FROM CGComponentes";
+            $resultado = $this->mi->query($sql);
+            $rs = mysqli_fetch_array($resultado);
+            $this->desconexion();
+            return $rs['id'];
+        }
         /*Fin Listar */
         /***********************************************************************************************************************************/
         /*Inicio Insertar*/
 
         public function InsertarComponente($folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta){
             $this->conexion();
-            $sql = "INSERT INTO CGComponentes (folio_comp, nom_comp, id_ubi, descripcion, observacion, id_tip_com, id_est_comp, id_sta_comp) VALUES ('$folio', '$nom', '$ubi', '$descripcion', '$observacion', '$tip', '$est', '$sta')";
+            $sql = "INSERT INTO CGComponentes VALUES (null,'$folio', '$nom', $ubi, '$descripcion', '$observacion', $tip, $est, $sta)";
             $resultado = $this->mi->query($sql);
             $this->desconexion();
             return $resultado;
         }
 
-        public function InvsertarUsuario($nom, $ape, $email, $log, $pas, $id_tip, $toten){
+        public function InsertarUsuario($nom, $ape, $email, $log, $pas, $id_tip, $toten){
             $this->conexion();
             $sql = "INSERT INTO CGUsuarios (nom_usu, ape_usu, correo, log_usu, pas_usu, id_tip, toten) VALUES ('$nom', '$ape', '$email', '$log', '$pas', '$id_tip', '$toten')";
             $resultado = $this->mi->query($sql);
