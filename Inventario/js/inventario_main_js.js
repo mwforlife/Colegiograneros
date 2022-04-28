@@ -64,3 +64,17 @@ $(document).ready(function() {
           
         fullscreenState.innerHTML = (document.msFullscreenElement) ? "" : "not ";  
     }, false);  
+
+
+    function Show__hide(){
+        var value = $(".menu__button").val();
+        if(value == 1){
+            $(".border__left").css("display", "none");
+            $(".border__right").css("margin-left", "0px");
+            $(".menu__button").val(2);
+        }else if(value == 2){
+            $(".border__left").css("display", "block");
+            $(".border__right").css("margin-left", "300px");
+            $(".menu__button").val(1);
+        }
+    }

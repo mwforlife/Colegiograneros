@@ -4,7 +4,7 @@ use CGGraneros;
 
 create table CGTipo_usuario(
 id_tip int not null auto_increment primary key,
-nom_tip int not null
+nom_tip varchar(30) not null
 );
 
 insert into CGTipo_usuario(nom_tip) values('Administrador');

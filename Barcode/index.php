@@ -15,6 +15,13 @@ require '../controller/controller.php';
             flex-wrap: wrap !important;
             padding: 20px;
         }
+
+        body{
+            width: 100%;
+            height: 100ch;
+            margin: 0;
+            padding: 0;
+        }
         
         .barra{
             width: 200px;
@@ -23,7 +30,7 @@ require '../controller/controller.php';
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container h-100 d-flex justify-content-center align-items-center">
         <div class="card w-100 d-flex flex-column align-items-center justify-content-center text-center">
             <img class="margin-auto" width="150" src="../img/logo/log.png" alt=""><br>
             <h3>Generador de codigos de Barras</h3>
@@ -67,9 +74,9 @@ require '../controller/controller.php';
             </form>
         </div>
         
-        <div id="root" class="card w-100 d-flex flex-row">
+        <!--<div id="root" class="card w-100 d-flex flex-row">
             
-        </div>
+        </div>-->
     </div>
     
     

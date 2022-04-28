@@ -29,7 +29,7 @@ include '../Model/EstadoComponente.php';
      public function CGUSer__login($user, $pass)
      {
          $this->conexion();
-         $sql = "SELECT * FROM CGUser WHERE log_usu = '$user' AND pas_usu = '$pass'";
+         $sql = "SELECT id_usu,nom_usu,ape_usu,correo, nom_tip, toten, modified FROM CGUser,CGTipo_usuario WHERE CGUser.id_tip=CGTipo_usuario.id_tip and log_usu = '$user' AND pas_usu = '$pass'";
          $result = $this->mi->query($sql);
          if($rs = mysqli_fetch_array($result))
          {
@@ -37,7 +37,7 @@ include '../Model/EstadoComponente.php';
              $nombre = $rs['nom_usu'];
              $apellido = $rs['ape_usu'];
              $email = $rs['correo'];
-            $tipo = $rs['id_tip'];
+            $tipo = $rs['nom_tip'];
             $toten = $rs['toten'];
             $modified = $rs['modified'];
             $usu = new CGUser($id, $nombre, $apellido, $email,$user, $pass, $tipo, $toten, $modified);
@@ -48,6 +48,29 @@ include '../Model/EstadoComponente.php';
          return "Error de Usuario o Contraseña";
      } 
     /******************************************************************************************************* */
+    /************************Search************************************* */
+    public function BuscarComponentes($id){
+        $this->conexion();
+        $sql = "SELECT id_comp, folio_comp, nom_comp, nom_ubi, descripcion, observacion, nom_tip_comp, nom_est_comp, nom_sta_comp FROM CGComponentes,CGTipoComponente,EstadoComponentes,CGUbicacion, StatusComponentes where CGComponentes.id_ubi=CGUbicacion.id_ubi and CGComponentes.id_tip_comp=CGTipoComponente.id_tip_comp and CGComponentes.id_est_comp=EstadoComponentes.id_est_comp and CGComponentes.id_sta_comp=StatusComponentes.id_sta_comp and id_comp = $id";
+        $resultado = $this->mi->query($sql);
+        if($rs = mysqli_fetch_array($resultado)){
+            $id = $rs['id_comp'];
+            $folio = $rs['folio_comp'];
+            $nom = $rs['nom_comp'];
+            $ubi = $rs['nom_ubi'];
+            $descripcion = $rs['descripcion'];
+            $observacion = $rs['observacion'];
+            $tip = $rs['nom_tip_comp'];
+            $est = $rs['nom_est_comp'];
+            $sta = $rs['nom_sta_comp'];
+            $comp = new CGComponentes($id, $folio, $nom, $ubi, $descripcion, $observacion, $tip, $est, $sta);
+            $this->desconexion();
+            return $comp;
+        }
+        $this->desconexion();
+        return null;
+    }
+    /***********************Selects***********************************************/
      public function ListarTipoComponente(){
          $this->conexion();
          $sql = "SELECT * FROM CGTipoComponente";

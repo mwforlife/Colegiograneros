@@ -65,18 +65,17 @@ require_once '../controller/controller.php';
                 
                 <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/credit.svg" alt="" class="item__img"> Prestamos</a>
                     <ul class="submenu__items">
-                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Prestamo</a></li>
-                        <li class="submenu__item"><a href="#" class="submenu__link">Listado de Prestamos</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link" type="button" data-bs-toggle="modal" data-bs-target="#registrarprestamo">Nuevo Prestamo</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link" type="button" data-bs-toggle="modal" data-bs-target="#listarprestamo">Listado de Prestamos</a></li>
                     </ul>
                 </li>
                 
                 
                 <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/categorias.svg" alt="" class="item__img"> Categorias</a>
                     <ul class="submenu__items">
-                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Estado</a></li>
-                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Tipo</a></li>
-                        <li class="submenu__item"><a href="#" class="submenu__link">Nuevo Status</a></li>
-                        <li class="submenu__item"><a href="#" class="submenu__link">Nueva Ubicacion</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link" type="button" data-bs-toggle="modal" data-bs-target="#registrarestado">Nuevo Estado</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link" type="button" data-bs-toggle="modal" data-bs-target="#registrartipo">Nuevo Tipo</a></li>
+                        <li class="submenu__item"><a href="#" class="submenu__link" type="button" data-bs-toggle="modal" data-bs-target="#registrarstatus">Nuevo Status</a></li>
                     </ul>
                 </li>
 
@@ -88,7 +87,7 @@ require_once '../controller/controller.php';
     <div class="border__right">
         <!----------------MENU HEADER-------------->
         <header class="border__rigth--header">
-            <button class="menu__button">
+            <button class="menu__button" onclick="Show__hide()" value="1">
                 <img src="../img/svg__icon/menu.svg" alt="" class="menu__button--img">
             </button>
             
@@ -104,8 +103,8 @@ require_once '../controller/controller.php';
                     <li class="header__menu--item"><a href="#" title="Reporte" class="header__menu--link"><img src="../img/svg__icon/report.svg" alt="" class="header__menu--img"></a></li>
                     
                     <li class="header__menu--item"><a href="#" class="header__menu--link"><img src="../img/svg__icon/user1.svg" alt="" class="header__menu--img"> <?php echo $_SESSION['nombre']?> <img src="../img/svg__icon/arrowbottom.svg" alt=""></a>
-                    <ul class="submenu__items">
-                        <li class="submenu__item"><a href="" class="submenu__link">Cerrar Sesion</a></li>
+                    <ul class="header__submenu__items">
+                        <li class="header__submenu__item"><a href="close.php" class="header__submenu__link">Cerrar Sesion</a></li>
                     </ul>
                     </li>
                 </ul>
@@ -143,7 +142,7 @@ require_once '../controller/controller.php';
                                 echo "<td>".$CGC->getNombre()."</td>";
                                 echo "<td>".$CGC->getEstado()."</td>";
                                 echo "<td>".$CGC->getUbicacion()."</td>";
-                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick='detalles(".$CGC->getId().")'><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick='details(".$CGC->getId().")'><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
                                 echo "<td><span class='badge bg-warning'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modalmodify' onclick='modificar(".$CGC->getId().")'><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
                                 echo "<td><span class='badge bg-danger'><a href='#' onclick='delete__component(".$CGC->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
                                 echo "</tr>";
@@ -343,7 +342,7 @@ require_once '../controller/controller.php';
                                 echo "<td>".$CGC->getNombre()."</td>";
                                 echo "<td>".$CGC->getEstado()."</td>";
                                 echo "<td>".$CGC->getUbicacion()."</td>";
-                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick='detalles(".$CGC->getId().")'><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
+                                echo "<td><span class='badge bg-success'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modaldetails' onclick='details(".$CGC->getId().")'><img src='../img/svg__icon/details.svg' alt=''></a></span></td>";
                                 echo "<td><span class='badge bg-warning'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modalmodify' onclick='modificar(".$CGC->getId().")'><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
                                 echo "<td><span class='badge bg-danger'><a href='#' onclick='delete__component(".$CGC->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
                                 echo "</tr>";
@@ -423,6 +422,7 @@ require_once '../controller/controller.php';
                        <th>Apellido</th>
                        <th>Numero de contacto</th>
                        <th>Modificar</th>
+                       <th>Eliminar</th>
                    </tr>
                </thead>
                <tbody>
@@ -461,27 +461,27 @@ require_once '../controller/controller.php';
        
        <div class="row justify-content-center">
           <div class="col-md-10">
-              <label for="" class="form-control text-center">Administrador</label>
+              <label for="" class="form-control text-center"><?php echo $_SESSION['tipo'] ?></label>
           </div>
            <div class="col-md-5">
                <label for="">Nombre</label>
-               <input type="text" value="Nombre" class="form-control">
+               <input type="text" value="<?php echo $_SESSION['nombre']?>" class="form-control">
            </div>
            <div class="col-md-5">
                <label for="">Apellido</label>
-               <input type="text" class="form-control" value="Apellido">
+               <input type="text" class="form-control" value="<?php echo $_SESSION['apellido']?>">
            </div>
            
            <div class="col-md-10">
-               <label for="">Numero de contacto</label>
-               <input type="number" value="912345678" class="form-control">
+               <label for="">Correo Electronico:</label>
+               <input type="email" value="<?php echo $_SESSION['email']?>" class="form-control">
            </div>
           </div>
       </div>
       
       <div class="modal-footer">
-       <button type="button" class="btn btn-warning"><img src="../img/svg__icon/edit.svg" alt="">Modificar</button>
-        <button type="button" class="btn btn-success"><img src="../img/svg__icon/new.svg" alt="">Guardar</button>
+       <button type="button" id="btn__modificar--perfil"  class="btn btn-warning"><img src="../img/svg__icon/edit.svg" alt="">Modificar</button>
+        <button type="button" id="btn__guardar--perfil" disabled class="btn btn-success"><img src="../img/svg__icon/new.svg" alt="">Guardar</button>
       </div>
             
     </div>
@@ -499,20 +499,21 @@ require_once '../controller/controller.php';
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <div class="row justify-content-center">
-           <div class="col-md-4">
-               <div class="label">Ubicacion Nueva</div>
-               <input type="text" class="form-control">
-           </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4 text-center ">
-               <button type="reset" class="btn btn-warning">Restablecer</button>
-                <button type="submit" class="btn btn-success ">Registrar</button>
-                
-            </div>
-        </div>
-        
+          <form action="" id="UbicacionForm">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="label">Ubicacion</div>
+                    <input name="UbacacionName" id="UbicacionName" type="text" class="form-control">
+                </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-4 text-center ">
+                    <button type="reset" class="btn btn-warning">Restablecer</button>
+                        <button type="submit" class="btn btn-success ">Registrar</button>
+                        
+                    </div>
+                </div>
+          </form>
         <hr class="w-100">
       <div class="row">
           <div class="col-md-12">
@@ -524,6 +525,22 @@ require_once '../controller/controller.php';
                           <th>Nombre</th>
                       </tr>
                   </thead>
+                  <tbody>
+                      <?php
+                      $lista = $c->ListarUbicacion();
+
+                      if (count($lista)>0) {
+                          for ($i=0; $i < count($lista); $i++) { 
+                              $CGCU = $lista[$i];
+                              echo "<tr>";
+                                echo "<td>".$CGCU->getId()."</td>";
+                                echo "<td>".$CGCU->getNombre()."</td>";
+                            echo "</tr>";
+                          }
+                      }
+                      
+                      ?>
+                  </tbody>
               </table>
           </div>
       </div>
@@ -535,51 +552,285 @@ require_once '../controller/controller.php';
     </div>
   </div>
 </div>
-    
 
-   <!-- Modal modal Details-->
-   <div class="modal fade" id="modaldetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"><img src="../img/svg__icon/user.svg" alt="">Detalles Componente</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       <div class="row">
-           <div class="col text-center">
-           <img src="../img/svg__icon/user.svg" width="80" alt="">
-           </div>
-       </div>
-       
-       <div class="row justify-content-center">
-          <div class="col-md-10">
-              <label for="" class="form-control text-center">Administrador</label>
-          </div>
-           <div class="col-md-5">
-               <label for="">Nombre</label>
-               <input type="text" value="Nombre" class="form-control">
-           </div>
-           <div class="col-md-5">
-               <label for="">Apellido</label>
-               <input type="text" class="form-control" value="Apellido">
-           </div>
-           
-           <div class="col-md-10">
-               <label for="">Numero de contacto</label>
-               <input type="number" value="912345678" class="form-control">
-           </div>
-          </div>
-      </div>
-      
-      <div class="modal-footer">
-       <button type="button" class="btn btn-warning"><img src="../img/svg__icon/edit.svg" alt="">Modificar</button>
-        <button type="button" class="btn btn-success"><img src="../img/svg__icon/new.svg" alt="">Guardar</button>
-      </div>
+
             
+   <!-- Modal REgistrar Tipo-->
+   <div class="modal fade" id="registrartipo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Tipo de Componente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="UbicacionForm">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="label">Nuevo Tipo</div>
+                            <input name="UbacacionName" id="UbicacionName" type="text" class="form-control">
+                        </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 text-center ">
+                            <button type="reset" class="btn btn-warning">Restablecer</button>
+                                <button type="submit" class="btn btn-success ">Registrar</button>
+                                
+                            </div>
+                        </div>
+                </form>
+                <hr class="w-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-dark table-striped caption-top">
+                        <caption>Lista de Tipos de componentes</caption>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $lista = $c->ListarTipoComponente();
+
+                            if (count($lista)>0) {
+                                for ($i=0; $i < count($lista); $i++) { 
+                                    $CGCU = $lista[$i];
+                                    echo "<tr>";
+                                        echo "<td>".$CGCU->getId()."</td>";
+                                        echo "<td>".$CGCU->getNombre()."</td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+                
+            
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    <!-- Modal REgistrar Tipo-->
+   <div class="modal fade" id="registrarestado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Estado de Componente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="UbicacionForm">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="label">Nuevo Estado</div>
+                            <input name="UbacacionName" id="UbicacionName" type="text" class="form-control">
+                        </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 text-center ">
+                            <button type="reset" class="btn btn-warning">Restablecer</button>
+                                <button type="submit" class="btn btn-success ">Registrar</button>
+                                
+                            </div>
+                        </div>
+                </form>
+                <hr class="w-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-dark table-striped caption-top">
+                        <caption>Lista de Estado de componentes</caption>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $lista = $c->ListarEstadoComponente();
+
+                            if (count($lista)>0) {
+                                for ($i=0; $i < count($lista); $i++) { 
+                                    $CGCU = $lista[$i];
+                                    echo "<tr>";
+                                        echo "<td>".$CGCU->getId()."</td>";
+                                        echo "<td>".$CGCU->getNombre()."</td>";
+                                        echo "<td><span class='badge bg-danger'><a href='#' onclick='deleteestado(".$CGC->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+                
+            
+            </div>
+        </div>
+    </div>
+
+   <!-- Modal Registrar status-->
+   <div class="modal fade" id="registrarstatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Status de Componente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="UbicacionForm">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="label">Status</div>
+                            <input name="UbacacionName" id="UbicacionName" type="text" class="form-control">
+                        </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 text-center ">
+                            <button type="reset" class="btn btn-warning">Restablecer</button>
+                                <button type="submit" class="btn btn-success ">Registrar</button>
+                                
+                            </div>
+                        </div>
+                </form>
+                <hr class="w-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-dark table-striped caption-top">
+                        <caption>Lista de Tipos de componentes</caption>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $lista = $c->ListarStatusComponentes();
+
+                            if (count($lista)>0) {
+                                for ($i=0; $i < count($lista); $i++) { 
+                                    $CGCU = $lista[$i];
+                                    echo "<tr>";
+                                        echo "<td>".$CGCU->getId()."</td>";
+                                        echo "<td>".$CGCU->getNombre()."</td>";
+                                        echo "<td><span class='badge bg-danger'><a href='#' onclick='deletestatus(".$CGC->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+                
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Registrar Prestamo-->
+   <div class="modal fade" id="registrarprestamo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Prestamo de Componente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" id="UbicacionForm">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="label">Status</div>
+                            <input name="UbacacionName" id="UbicacionName" type="text" class="form-control">
+                        </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 text-center ">
+                            <button type="reset" class="btn btn-warning">Restablecer</button>
+                                <button type="submit" class="btn btn-success ">Registrar</button>
+                                
+                            </div>
+                        </div>
+                </form>
+                <hr class="w-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-dark table-striped caption-top">
+                        <caption>Lista de Tipos de componentes</caption>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $lista = $c->ListarStatusComponentes();
+
+                            if (count($lista)>0) {
+                                for ($i=0; $i < count($lista); $i++) { 
+                                    $CGCU = $lista[$i];
+                                    echo "<tr>";
+                                        echo "<td>".$CGCU->getId()."</td>";
+                                        echo "<td>".$CGCU->getNombre()."</td>";
+                                        echo "<td><span class='badge bg-danger'><a href='#' onclick='deletestatus(".$CGC->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- Modal modal Details-->
+    <div class="modal fade" id="modaldetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><img src="../img/svg__icon/list.svg">Detalles Componente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">            
+            <div class="row justify-content-center">
+                <div id="detalles" class="col-md-12">
+
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+            </div>
+
+                    
+            </div>
+        </div>
+    </div>
 
           
     <!-------------JAVASCRIPTS-------------------->
@@ -594,5 +845,6 @@ require_once '../controller/controller.php';
     <script src="../js/process/inventario__list__process.js"></script>
     <script src="../js/process/inventario__delete__process.js"></script>
     <script src="../js/process/inventario__modify__process.js"></script>
+    <script src="../js/process/Inventario__details__component.js"></script>
 </body>
 </html>
