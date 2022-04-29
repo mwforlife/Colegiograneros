@@ -7,6 +7,7 @@ include '../Model/StatusComponentes.php';
 include '../Model/TipoUsuario.php';
 include '../Model/TipoComponente.php';
 include '../Model/EstadoComponente.php';
+include '../Model/CGEstadoPrestamo.php';
 
  class Controller 
  {
@@ -193,10 +194,6 @@ include '../Model/EstadoComponente.php';
             return $lista;
         }
 
-
-
-
-
         public function ListarComponentesPorFolio($folio){
             $this->conexion();
             $sql = "SELECT * FROM CGComponentes WHERE folio_comp = '$folio'";
@@ -329,6 +326,21 @@ include '../Model/EstadoComponente.php';
             return $lista;
         }
 
+        public function ListarEstadoPrestamo(){
+            $this->conexion();
+            $sql = "SELECT * FROM CGEstado_Prestamo";
+            $resultado = $this->mi->query($sql);
+            $lista = array();
+            while($rs = mysqli_fetch_array($resultado)){
+                $id = $rs['id_est_pres'];
+                $nom = $rs['nom_est_pres'];
+                $est = new CGEstadoPrestamo($id, $nom);
+                $lista[] = $est;
+            }
+            $this->desconexion();
+            return $lista;
+        }
+
         public function ListarPrestamos(){
             $this->conexion();
             $sql = "SELECT * FROM CGPrestamos";
@@ -345,6 +357,8 @@ include '../Model/EstadoComponente.php';
                 $prest = new CGPrestamos($id, $id_comp, $id_doc, $id_est, $fecha_prest, $fecha_dev, $observacion);
                 $lista[] = $prest;
             }
+            $this->desconexion();
+            return $lista;
         }
 
 
@@ -371,7 +385,7 @@ include '../Model/EstadoComponente.php';
 
         public function InsertarUsuario($nom, $ape, $email, $log, $pas, $id_tip, $toten){
             $this->conexion();
-            $sql = "INSERT INTO CGUsuarios (nom_usu, ape_usu, correo, log_usu, pas_usu, id_tip, toten) VALUES ('$nom', '$ape', '$email', '$log', '$pas', '$id_tip', '$toten')";
+            $sql = "INSERT INTO CGUsuarios VALUES (null, '$nom', '$ape', '$email', '$log', '$pas', $id_tip, '$toten')";
             $resultado = $this->mi->query($sql);
             $this->desconexion();
             return $resultado;
@@ -379,7 +393,7 @@ include '../Model/EstadoComponente.php';
 
         public function InsertarDocente($nom, $ape, $con){
             $this->conexion();
-            $sql = "INSERT INTO CGDocentes (nom_doc, ape_doc, con_doc) VALUES ('$nom', '$ape', '$con')";
+            $sql = "INSERT INTO CGDocente values (null,'$nom', '$ape', '$con')";
             $resultado = $this->mi->query($sql);
             $this->desconexion();
             return $resultado;
@@ -387,10 +401,18 @@ include '../Model/EstadoComponente.php';
 
         public function InsertarPrestamo($id_com, $id_doc,$id_est, $fecha_prest, $fecha_dev, $observacion){
             $this->conexion();
-            $sql = "INSERT INTO CGPrestamos (id_comp, id_doc,id_est, fecha_prest, fecha_dev, observacion) VALUES ('$id_com', '$id_doc',$id_est, '$fecha_prest', '$fecha_dev', '$observacion')";
+            $sql = "INSERT INTO CGPrestamos VALUES (null,$id_com, $id_doc,$id_est, '$fecha_prest', '$fecha_dev', '$observacion')";
             $resultado = $this->mi->query($sql);
             $this->desconexion();
             return $resultado;
+        }
+
+        public function InsertarCGUbicacion($nom){
+            $this->conexion();
+            $sql = "INSERT INTO CGUbicacion VALUES (null,'$nom')";
+            $resultado = $this->mi->query($sql);
+            $this->desconexion();
+            return json_encode($resultado);
         }
 
         /*Fin Insertar*/

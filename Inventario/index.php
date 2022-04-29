@@ -63,12 +63,7 @@ require_once '../controller/controller.php';
                     </ul>
                 </li>
                 
-                <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/credit.svg" alt="" class="item__img"> Prestamos</a>
-                    <ul class="submenu__items">
-                        <li class="submenu__item"><a href="#" class="submenu__link" type="button" data-bs-toggle="modal" data-bs-target="#registrarprestamo">Nuevo Prestamo</a></li>
-                        <li class="submenu__item"><a href="#" class="submenu__link" type="button" data-bs-toggle="modal" data-bs-target="#listarprestamo">Listado de Prestamos</a></li>
-                    </ul>
-                </li>
+                <li class="menu__item"><a href="#" class="menu__link" type="button" data-bs-toggle="modal" data-bs-target="#registrarprestamo"><img src="../img/svg__icon/credit.svg" alt="" class="item__img"> Prestamos</a></li>
                 
                 
                 <li class="menu__item"><a href="#" class="menu__link"><img src="../img/svg__icon/categorias.svg" alt="" class="item__img"> Categorias</a>
@@ -372,31 +367,32 @@ require_once '../controller/controller.php';
         <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Docentes</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-       <div class="row">
-           <div class="col-md-12">
-               <div class="label">Nombre Docente</div>
-               <input type="text" class="form-control">
-           </div>
-           <div class="col-md-12">
-               <label for="">Apellido Docente</label>
-               <input type="text" class="form-control">
-           </div>
-       </div>
-       
-       <div class="row">
-           <div class="col-md-12">
-               <label >Contacto telefonico:</label>
-               <input type="number" placeholder="Ejemplo: 912345678" class="form-control">
-           </div>
-       </div>
-        
-      </div>
-      <div class="modal-footer">
-       <button type="reset" class="btn btn-warning">Restablecer</button>
-        <button type="submit" class="btn btn-success">Registrar</button>
-      </div>
-          
+      <form action="" id="CGDocente__Form">
+            <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="label">Nombre Docente</div>
+                    <input type="text" class="form-control" name="CGDocente__name">
+                </div>
+                <div class="col-md-12">
+                    <label for="">Apellido Docente</label>
+                    <input type="text" class="form-control" name="CGDocente__apellido">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <label >Contacto telefonico:</label>
+                    <input type="number" name="CGDocente__contact" placeholder="Ejemplo: 912345678" class="form-control">
+                </div>
+            </div>
+                
+            </div>
+            <div class="modal-footer">
+            <button type="reset" class="btn btn-warning">Restablecer</button>
+                <button type="submit" class="btn btn-success">Registrar</button>
+            </div>
+      </form>
       
     </div>
   </div>
@@ -426,7 +422,19 @@ require_once '../controller/controller.php';
                    </tr>
                </thead>
                <tbody>
-                   
+                   <?php
+                   $lista = $c->ListarDocente();
+                   for ($i=0; $i < count($lista); $i++) { 
+                       $CGDocente = $lista[$i];
+                       echo "<tr>";
+                       echo "<td>".$CGDocente->getNombre()."</td>";
+                       echo "<td>".$CGDocente->getApellido()."</td>";
+                       echo "<td>".$CGDocente->getContacto()."</td>";
+                       echo "<td><span class='badge bg-warning'><a href='#' type='button' data-bs-toggle='modal' data-bs-target='#modalmodify' onclick='modificar(".$CGDocente->getId().")'><img src='../img/svg__icon/edit.svg' alt=''></a></span></td>";
+                       echo "<td><span class='badge bg-danger'><a href='#' onclick='delete__docente(".$CGDocente->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
+                       echo "</tr>";
+                   }
+                   ?>
                </tbody>
            </table>
            </div>
@@ -503,7 +511,7 @@ require_once '../controller/controller.php';
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <div class="label">Ubicacion</div>
-                    <input name="UbacacionName" id="UbicacionName" type="text" class="form-control">
+                    <input name="UbicacionName" id="UbicacionName" type="text" class="form-control">
                 </div>
                 </div>
                 <div class="row justify-content-center">
@@ -618,7 +626,7 @@ require_once '../controller/controller.php';
         </div>
     </div>
 
-    <!-- Modal REgistrar Tipo-->
+    <!-- Modal Registrar Estado-->
    <div class="modal fade" id="registrarestado" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -685,7 +693,7 @@ require_once '../controller/controller.php';
 
    <!-- Modal Registrar status-->
    <div class="modal fade" id="registrarstatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Status de Componente</h5>
@@ -749,20 +757,55 @@ require_once '../controller/controller.php';
 
     <!-- Modal Registrar Prestamo-->
    <div class="modal fade" id="registrarprestamo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Registrar Prestamo de Componente</h5>
+                <h5 class="modal-title"><img src="../img/svg__icon/new.svg" alt="">Prestamos de Componente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="" id="UbicacionForm">
                     <div class="row justify-content-center">
-                        <div class="col-md-4">
-                            <div class="label">Status</div>
-                            <input name="UbacacionName" id="UbicacionName" type="text" class="form-control">
+                        <div class="col-md-6">
+                        <label class="label< w-100">ID Componente</label>
                         </div>
                         </div>
+
+                        <div class="row justify-content-center">
+                        <div class="col-md-6 d-flex justify-align-content-between">
+                            <input name="ComponentID" id="ComponentID" type="number" class="form-control w-100 gap-3">
+                            <button type="button" class="btn btn-success" onclick="searchComponent()"><img width="20" src="../img/svg__icon/search.svg"></button>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col detalles__prestamos">
+
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <label for="">Prestatario</label>
+                                <select autocomplete="TRUE" name="CGPrestatario__Component" id="CGPrestatario__Component" class="form-control">
+                                    <option value="0">Seleccione el prestatario</option>
+                                    <?php
+                                    $lista = $c->ListarDocente();
+                                    for ($i=0; $i < count($lista); $i++) { 
+                                        $CGCU = $lista[$i];
+                                        echo "<option value='".$CGCU->getId()."'>".$CGCU->getNombre()." ".$CGCU->getApellido()."</option>";                                        
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <label for="">Fecha de Prestamo</label>
+                                    <input type="date" name="CGFecha__Prestamos" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="row justify-content-center">
                             <div class="col-md-4 text-center ">
                             <button type="reset" class="btn btn-warning">Restablecer</button>
@@ -775,17 +818,25 @@ require_once '../controller/controller.php';
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-dark table-striped caption-top">
-                        <caption>Lista de Tipos de componentes</caption>
+                        <caption>Listado de Prestamos</caption>
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre</th>
+                                <th>Componente</th>
+                                <th>Docente</th>
+                                <th>Fecha de Prestamo</th>
+                                <th>Fecha de Devolucion</th>
+                                <th>Estado</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $lista = $c->ListarStatusComponentes();
+                            $lista = $c->ListarPrestamos();
 
+                            for ($i=0; $i < count($lista) ; $i++) { 
+                            
+                            }
                             if (count($lista)>0) {
                                 for ($i=0; $i < count($lista); $i++) { 
                                     $CGCU = $lista[$i];
