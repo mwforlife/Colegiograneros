@@ -151,6 +151,13 @@ body{
     align-items: center;
 }
 
+.buscar{
+    padding-left: 25px;
+    background-image: url(../../img/svg__icon/buscar.svg);
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
 .search form{
     width: 100%;
 }

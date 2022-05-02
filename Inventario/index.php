@@ -89,7 +89,7 @@ require_once '../controller/controller.php';
             <div class="header__menu">
                <div class="search">
                   <form action="">
-                   <input type="text" placeholder="Buscar...." class="form-control">
+                   <input type="text" placeholder="Buscar...." class="form-control buscar">
                   </form>
                </div>
                 <ul class="header__menu--items">
@@ -559,10 +559,7 @@ require_once '../controller/controller.php';
       
     </div>
   </div>
-</div>
-
-
-            
+</div>            
    <!-- Modal REgistrar Tipo-->
    <div class="modal fade" id="registrartipo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -596,6 +593,7 @@ require_once '../controller/controller.php';
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -608,6 +606,7 @@ require_once '../controller/controller.php';
                                     echo "<tr>";
                                         echo "<td>".$CGCU->getId()."</td>";
                                         echo "<td>".$CGCU->getNombre()."</td>";
+                                        echo "<td><span class='badge bg-danger'><a href='#' onclick='deletetipo(".$CGCU->getId().")'><img src='../img/svg__icon/delete.svg' alt=''></a></span></td>";
                                     echo "</tr>";
                                 }
                             }
@@ -724,6 +723,7 @@ require_once '../controller/controller.php';
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
